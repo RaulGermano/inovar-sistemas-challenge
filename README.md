@@ -6,7 +6,7 @@ initial instructions:
 
 ```bash
 #to install dependencies 
-npm run dev
+npm install
 
 #to build in local
 npm run dev
