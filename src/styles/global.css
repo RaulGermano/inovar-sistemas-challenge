@@ -1,0 +1,11 @@
+/* @import "tailwindcss/utilities"; */
+@tailwind base;
+.container {
+  @media (max-width: 640px) {
+    padding: 0 12px;
+  }
+}
+
+@tailwind components;
+
+@tailwind utilities;
