@@ -30,13 +30,14 @@ const Page = () => {
           )}
 
           <div className="flex flex-col gap-[60px]">
-            {posts?.map((post, index) => {
-              const props = {
-                ...post,
-                created_at: convertTimestampToTimeAgo(post.created_at),
-              }
-              return <PostCard key={index} {...props} />
-            })}
+            {!isLoading &&
+              posts?.map((post, index) => {
+                const props = {
+                  ...post,
+                  created_at: convertTimestampToTimeAgo(post.created_at),
+                }
+                return <PostCard key={index} {...props} />
+              })}
 
             {!posts?.length && !isLoading && (
               <DescriptionBaseButton
