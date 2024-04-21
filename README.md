@@ -28,7 +28,7 @@ Choose a browser to build
 
 ![image-1](https://github.com/RaulGermano/inovar-sistemas-challenge/assets/44757383/5bc57265-d6ad-40a7-b5a3-b9499e43f399)
 
-And execute the posts-list feature
+And execute the posts-list feature spec
 
 ![image-2](https://github.com/RaulGermano/inovar-sistemas-challenge/assets/44757383/5b01312f-b476-4c2c-9588-11206bfb8655)
 
@@ -38,7 +38,7 @@ Expected result
 
 ## BDD
 Developed following the structure of gherkin provided by the Cucumber. File path:
-[`/cypress/e2e/posts-list.feature`](https://github.com/RaulGermano/inovar-sistemas-challenge/tree/main/cypress/e2e/posts-list.feature).
+[`/cypress/e2e/posts-list.feature`](https://github.com/RaulGermano/inovar-sistemas-challenge/blob/main/cypress/e2e/step_definitions/posts-list.feature).
 
 ![image-3](https://github.com/RaulGermano/inovar-sistemas-challenge/assets/44757383/25952a53-b350-4e0b-a293-4b7e14b70a04)
 
