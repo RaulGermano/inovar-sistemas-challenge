@@ -27,7 +27,7 @@ const HeaderResearcher = () => {
   const anchorRef = useRef<HTMLDivElement>(null)
 
   const { filterPosts, setFilterPosts } = useResearcher()
-  const debouncedSearch = useDebounce(search, 3000)
+  const debouncedSearch = useDebounce(search)
 
   const handleToggle = () => setOpen((prevOpen) => !prevOpen)
 
@@ -68,7 +68,7 @@ const HeaderResearcher = () => {
             variant="contained"
             onClick={handleToggle}
             color="info"
-            className="mr-4 w-[40px] border border-solid border-[#dddddd] px-1 shadow-none hover:bg-[#fbfbfb] hover:shadow-none"
+            className="order-by-menu mr-4 w-[40px] border border-solid border-[#dddddd] px-1 shadow-none hover:bg-[#fbfbfb] hover:shadow-none"
           >
             <MenuIcon color="action" />
           </Button>
@@ -119,7 +119,7 @@ const HeaderResearcher = () => {
           variant="outlined"
           fullWidth
           size="small"
-          className="w-[300px] bg-[#f0f0f0]"
+          className="filter-by-text w-[300px] bg-[#f0f0f0]"
           value={search}
           onChange={handleSearchFilter}
           InputProps={{

@@ -13,13 +13,13 @@ const sortPostsByProperty = (
       const numValueA = Number(valueA)
       const numValueB = Number(valueB)
 
-      if (numValueA < numValueB) return -1
-      if (numValueA > numValueB) return 1
+      if (numValueA > numValueB) return -1
+      if (numValueA < numValueB) return 1
       return 0
     }
 
-    if (valueA < valueB) return -1
-    if (valueA > valueB) return 1
+    if (valueA > valueB) return -1
+    if (valueA < valueB) return 1
     return 0
   })
 }

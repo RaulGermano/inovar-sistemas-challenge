@@ -17,7 +17,7 @@ const PostCard = ({
   title,
 }: IPost) => {
   return (
-    <div className="flex flex-row gap-[22px]">
+    <div className="post-card-item flex flex-row gap-[22px]">
       <ButtonGroup
         orientation="vertical"
         variant="contained"
@@ -53,7 +53,9 @@ const PostCard = ({
             {url}
           </p>
           <Link href="#">
-            <p className="line-clamp-1 text-[26px] leading-[normal]">{title}</p>
+            <p className="post-card-text line-clamp-1 text-[26px] leading-[normal]">
+              {title}
+            </p>
           </Link>
         </div>
 
