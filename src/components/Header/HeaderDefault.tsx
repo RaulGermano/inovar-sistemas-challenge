@@ -1,10 +1,9 @@
 import { userDataMock } from '@/data/constants'
+import LogoIconButton from '@components/Button/LogoIconButton'
 import AddIcon from '@mui/icons-material/Add'
-import Button from '@mui/material/Button'
-import ButtonGroup from '@mui/material/ButtonGroup'
+import { Button, ButtonGroup } from '@mui/material'
 import Image from 'next/image'
 import { FC, ReactNode, useRef } from 'react'
-import LogoIconButton from '../Button/LogoIconButton'
 
 type HeaderProps = {
   children?: ReactNode

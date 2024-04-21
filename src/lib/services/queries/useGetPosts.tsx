@@ -20,7 +20,7 @@ const getPosts = async (filters?: IFiltersPosts): Promise<IPost[]> => {
 
     if (filters?.search) {
       data = data.filter((post) =>
-        post.title.toLowerCase().includes(filters?.search || ''),
+        post.title.toLowerCase().includes(filters?.search?.toLowerCase() || ''),
       )
     }
 

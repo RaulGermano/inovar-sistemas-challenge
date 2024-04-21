@@ -1,28 +1,45 @@
 import { searchMenuOptions } from '@/data/constants'
 import { IPost } from '@/lib/types/post'
+import useDebounce from '@/utils/useDebounce'
+import HeaderDefault from '@components/Header/HeaderDefault'
 import { useResearcher } from '@contexts/ResearcherContext'
 import MenuIcon from '@mui/icons-material/Menu'
 import SearchIcon from '@mui/icons-material/Search'
-import Button from '@mui/material/Button'
-import ButtonGroup from '@mui/material/ButtonGroup'
-import ClickAwayListener from '@mui/material/ClickAwayListener'
-import Grow from '@mui/material/Grow'
-import InputAdornment from '@mui/material/InputAdornment'
-import MenuItem from '@mui/material/MenuItem'
-import MenuList from '@mui/material/MenuList'
-import Paper from '@mui/material/Paper'
-import Popper from '@mui/material/Popper'
-import TextField from '@mui/material/TextField'
-import { ChangeEvent, MouseEvent, useRef, useState } from 'react'
-import HeaderDefault from './HeaderDefault'
+import {
+  Button,
+  ButtonGroup,
+  ClickAwayListener,
+  Grow,
+  InputAdornment,
+  MenuItem,
+  MenuList,
+  Paper,
+  Popper,
+  TextField,
+} from '@mui/material'
+import { ChangeEvent, MouseEvent, useEffect, useRef, useState } from 'react'
 
 const HeaderResearcher = () => {
-  const { filterPosts, setFilterPosts } = useResearcher()
-  const [open, setOpen] = useState(false)
-  const anchorRef = useRef<HTMLDivElement>(null)
-  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [search, setSearch] = useState<string>()
+  const [selectedIndex, setSelectedIndex] = useState<number>(0)
+  const [open, setOpen] = useState<boolean>(false)
 
-  const handleMenuItemClick = (
+  const anchorRef = useRef<HTMLDivElement>(null)
+
+  const { filterPosts, setFilterPosts } = useResearcher()
+  const debouncedSearch = useDebounce(search)
+
+  const handleToggle = () => setOpen((prevOpen) => !prevOpen)
+
+  const handleClose = (event: Event) => {
+    if (anchorRef.current?.contains(event.target as HTMLElement)) {
+      return
+    }
+
+    setOpen(false)
+  }
+
+  const handleOrderByFilter = (
     _event: MouseEvent<HTMLLIElement>,
     index: number,
   ) => {
@@ -35,22 +52,13 @@ const HeaderResearcher = () => {
     setOpen(false)
   }
 
-  const handleToggle = () => setOpen((prevOpen) => !prevOpen)
-
-  const handleClose = (event: Event) => {
-    if (anchorRef.current?.contains(event.target as HTMLElement)) {
-      return
-    }
-
-    setOpen(false)
-  }
-
   const handleSearchFilter = (event: ChangeEvent<HTMLInputElement>) => {
-    setFilterPosts({
-      ...filterPosts,
-      search: event.target?.value,
-    })
+    setSearch(event.target?.value)
   }
+
+  useEffect(() => {
+    setFilterPosts({ ...filterPosts, search: debouncedSearch })
+  }, [debouncedSearch, filterPosts, setFilterPosts])
 
   return (
     <HeaderDefault>
@@ -60,7 +68,7 @@ const HeaderResearcher = () => {
             variant="contained"
             onClick={handleToggle}
             color="info"
-            className="mr-4 w-[40px] border border-solid border-[#dddddd] px-1 shadow-none hover:bg-[#fbfbfb] hover:shadow-none"
+            className="order-by-menu mr-4 w-[40px] border border-solid border-[#dddddd] px-1 shadow-none hover:bg-[#fbfbfb] hover:shadow-none"
           >
             <MenuIcon color="action" />
           </Button>
@@ -94,7 +102,7 @@ const HeaderResearcher = () => {
                         key={index}
                         disabled={disabled}
                         selected={index === selectedIndex}
-                        onClick={(event) => handleMenuItemClick(event, index)}
+                        onClick={(event) => handleOrderByFilter(event, index)}
                       >
                         {value}
                       </MenuItem>
@@ -111,7 +119,8 @@ const HeaderResearcher = () => {
           variant="outlined"
           fullWidth
           size="small"
-          className="w-[300px] bg-[#f0f0f0]"
+          className="filter-by-text w-[300px] bg-[#f0f0f0]"
+          value={search}
           onChange={handleSearchFilter}
           InputProps={{
             startAdornment: (
